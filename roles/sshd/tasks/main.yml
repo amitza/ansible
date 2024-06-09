@@ -1,7 +1,8 @@
-    - name: if harden is enabled
-      include_tasks: harden.yml
-      when: harden
+---
+- name: If harden is enabled
+  ansible.builtin.include_tasks: harden.yml
+  when: harden
 
-    - name: Add ssh keys
-      include_tasks: ssh.yml
-      when: sshd
+- name: Add ssh keys
+  ansible.builtin.include_tasks: ssh.yml
+  when: sshd

@@ -23,6 +23,9 @@ rules:
     max: 200
   truthy:
     check-keys: false
-
-ignore: |
-  changelogs/.plugin-cache.yaml
+  comments:
+    min-spaces-from-content: 1
+  comments-indentation: false
+  octal-values:
+    forbid-implicit-octal: true
+    forbid-explicit-octal: true

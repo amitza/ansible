@@ -1,26 +1,26 @@
 ---
 - name: Check for lock file
-  stat:
-    path: "/home/{{ user.name }}/.user.lock"
+  ansible.builtin.stat:
+    path: /home/{{ user.name }}/.user.lock
   register: user_lock
 
 - name: Create new user on Ubuntu
   become: true
 
+  when: not user_lock.stat.exists
   block:
     - name: Check if user's home directory already exists
-      stat:
-        path: "/home/{{ user.name }}"
+      ansible.builtin.stat:
+        path: /home/{{ user.name }}
       register: home_dir
 
     - name: Check if the OS is Ubuntu
-      fail:
-        msg: "This playbook only supports Ubuntu."
+      ansible.builtin.fail:
+        msg: This playbook only supports Ubuntu.
       when: ansible_facts['distribution'] != 'Ubuntu' # fail if not ubuntu
 
-
     - name: Create a new user with the generated password
-      user:
+      ansible.builtin.user:
         name: "{{ user.name }}"
         state: present
         password: ""
@@ -32,9 +32,7 @@
       register: user_created
       when: not home_dir.stat.exists
 
-
     - name: Create lock file when this role is executed
-      file:
-        path: "/home/{{ user.name }}/.user.lock"
+      ansible.builtin.file:
+        path: /home/{{ user.name }}/.user.lock
         state: touch
-  when: not user_lock.stat.exists

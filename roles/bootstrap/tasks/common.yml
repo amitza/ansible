@@ -1,28 +1,30 @@
 ---
 - name: Check for lock file
-  stat:
-    path: "/home/{{ user.name }}/.bootstrap.lock"
+  ansible.builtin.stat:
+    path: /home/{{ user.name }}/.bootstrap.lock
   register: bootsrtap_lock
 
 - name: Install various utilities on Ubuntu
   become: true
+  when: not bootsrtap_lock.stat.exists
+
   block:
     - name: Bootstraping the system
-      debug:
-        msg: "No lock file found. Bootstrapping the system."
+      ansible.builtin.debug:
+        msg: No lock file found. Bootstrapping the system.
 
     - name: Check if the OS is Ubuntu
-      fail:
-        msg: "This playbook only supports Ubuntu."
+      ansible.builtin.fail:
+        msg: This playbook only supports Ubuntu.
       when: ansible_facts['distribution'] != 'Ubuntu' # fail if not ubuntu
 
     - name: Update APT package cache
-      apt:
+      ansible.builtin.apt:
         update_cache: true
         cache_valid_time: 3600 #  Cache is considered valid for 1 hour
 
     - name: Install required packages
-      apt:
+      ansible.builtin.apt:
         name:
           - unzip
           - logrotate
@@ -42,17 +44,14 @@
         state: present
 
     - name: Seting the hostname
-      hostname:
+      ansible.builtin.hostname:
         name: "{{ hostname }}"
 
-
     - name: Create lock file when this role is executed
-      file:
-        path: "/home/{{ user.name }}/.bootstrap.lock"
+      ansible.builtin.file:
+        path: /home/{{ user.name }}/.bootstrap.lock
         state: touch
-  when: not bootsrtap_lock.stat.exists
-
 - name: Bootstraping the system is being skipped
-  debug:
-    msg: "Lock file found. Skipping bootsrap."
+  ansible.builtin.debug:
+    msg: Lock file found. Skipping bootsrap.
   when: bootsrtap_lock.stat.exists

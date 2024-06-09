@@ -3,10 +3,10 @@
   become: true
   block:
     - name: Make sure ufw is installed
-      shell: which ufw
+      ansible.builtin.command: which ufw
       register: which_ufw
 
     - name: Configure ufw rules
       when: which_ufw.rc == 0
-      shell: |
+      ansible.builtin.shell: |
         sudo ufw disable

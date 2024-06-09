@@ -4,17 +4,17 @@ name: lava
 version: 0.1.0
 readme: README.md
 authors:
-  - "Magma Dev Team"
-description: "Ansible Collection for Lava"
+  - Magma Dev Team
+description: Ansible Collection for Lava
 license_file: LICENSE
 tags:
   - crypto
   - lava
   - lavanet
   - blockchain
-repository: "https://github.com/lavanet/ansible"
-documentation: "https://github.com/lavanet/ansible"
-issues: "https://github.com/lavanet/ansible/issues"
+repository: https://github.com/lavanet/ansible
+documentation: https://github.com/lavanet/ansible
+issues: https://github.com/lavanet/ansible/issues
 build_ignore:
   - .config
   - .github
@@ -22,5 +22,5 @@ build_ignore:
   - changelogs
   - roles/*/molecule
   - tests
-  - '*test-requirements.txt'
-  - '*.tar.gz'
+  - "*test-requirements.txt"
+  - "*.tar.gz"
