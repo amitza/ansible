@@ -1,0 +1,7 @@
+    - name: if harden is enabled
+      include_tasks: harden.yml
+      when: harden
+
+    - name: Add ssh keys
+      include_tasks: ssh.yml
+      when: sshd

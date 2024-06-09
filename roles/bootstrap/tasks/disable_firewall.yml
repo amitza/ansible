@@ -1,0 +1,12 @@
+---
+- name: Configure Firewall Rules
+  become: true
+  block:
+    - name: Make sure ufw is installed
+      shell: which ufw
+      register: which_ufw
+
+    - name: Configure ufw rules
+      when: which_ufw.rc == 0
+      shell: |
+        sudo ufw disable

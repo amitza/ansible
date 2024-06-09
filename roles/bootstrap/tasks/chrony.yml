@@ -1,0 +1,24 @@
+---
+- name: Install chrony
+  become: true
+  block:
+  - name: make sure chronyd is installed
+    apt:
+     name: chrony
+     state: latest
+     update_cache: true
+
+  - name: deploy chrony.conf template
+    template:
+     src: chrony.conf.j2
+     dest: /etc/chrony.conf
+     owner: root
+     group: root
+     mode: 0644
+     backup: true
+
+  - name: Restart chronyd
+    service:
+      name: chronyd
+      state: restarted
+      daemon_reload: yes

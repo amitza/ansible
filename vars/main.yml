@@ -1,0 +1,12 @@
+user:
+  enabled: false
+  name: ubuntu
+
+bootstrap:
+  enabled: false
+
+chrony:
+  enabled: false
+
+disable_firewall:
+  enabled: false

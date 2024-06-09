@@ -16,6 +16,7 @@ Before proceeding, ensure you have:
   - Make sure root users are not promoted for password:
     ```shell
     echo "$USER ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/dont-prompt-$USER-for-sudo-password
+    # Example for the ubuntu user
     echo "ubuntu ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/dont-prompt-ubuntu-for-sudo-password
     ```
 
@@ -34,13 +35,13 @@ Deploy or update Lavanet services with the following command:
 
 ```bash
 ansible-playbook -i inventory playbooks/<playbook_name>.yml
-``` 
+```
 
 Examples with additional switches:
 
 ```bash
  ansible-playbook  -i inventory/list.ini pre-run.yml  --private-key=~/.ssh/lava --diff --ask-vault-pass
-``` 
+```
 **-i inventory/nodes**  -select the inventory file you want playbook to be run on
 **pre-run.yml** - select the playbook you want to run
 **--private-key=~/.ssh/lava** - use this ssh key to authorise to the machine(you can use yours)
@@ -66,7 +67,7 @@ Ensure you replace <playbook_name> with the appropriate playbook for your target
 - [X] Create this readme
 - [X] Create a bootstrap role for server preparation.
 - [X] Crate a go installation with version pinining
-- [X] Lavaviosr installation role 
+- [X] Lavaviosr installation role
 - [X] Create sshd bootstrap role
 - [X] Add wallet installation support
 - [X] Create a iprpc installation under consumer.

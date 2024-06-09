@@ -1,0 +1,16 @@
+---
+- name: Include user task
+  include_tasks: user.yml
+  when: user.enabled | default(false)
+
+- name: Incude bootstrap task
+  include_tasks: common.yml
+  when: bootstrap.enabled | default(false)
+
+- name: Include chrony task
+  include_tasks: chrony.yml
+  when: chrony.enabled | default(false)
+
+- name: Include disable_firewall task
+  include_tasks: disable_firewall.yml
+  when: disable_firewall.enabled | default(false)
