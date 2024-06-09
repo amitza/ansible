@@ -32,6 +32,7 @@ I have...
 * [ ] provided a link to the relevant issue or specification
 * [ ] reviewed "Files changed" and left comments if necessary
 * [ ] included the necessary unit and integration tests
+* [ ] ran `ansible-lint` and made sure there are no errors
 * [ ] updated the relevant documentation or specification
 * [ ] confirmed all CI checks have passed
 
